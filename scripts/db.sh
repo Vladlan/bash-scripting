@@ -25,10 +25,22 @@ restore () {
 	fi	
 }
 
+find() {
+	read -p "Type username " username
+	whatToFind="^$username"
+	result=$(grep $whatToFind "$DB_FILE_PATH" -w)
+	if [ "$result" ]; then
+		echo "$result"
+	else
+		echo "User not found"
+	fi
+}
+
 case $1 in
 	"add") add;;
 	"backup") backup;;
 	"restore") restore;;
+	"find") find;;
 	"help") echo "Available commands are: add, backup, find, list, help";;
 	*) echo "'$1' is not supported script command. Run it with help argument to see which arguments are available"
 esac
