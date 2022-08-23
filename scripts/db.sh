@@ -2,9 +2,18 @@
 
 DB_FILE_PATH=./data/users.db
 
+validateForLatinCharactersOnly() {
+	if ! [[ "$1" =~ ^[a-zA-z]+$ ]]; then
+		echo "Validation Error: Wrong input. Only latin letters allowed"
+		exit 1
+	fi
+}
+
 add() {
 	read -rep $'Type username:\n' username
+	validateForLatinCharactersOnly $username
 	read -rep $'Type role:\n' role
+	validateForLatinCharactersOnly $role
 	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
     echo "$username,$role" >> "$DB_FILE_PATH"
 }
