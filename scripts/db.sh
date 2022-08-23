@@ -3,22 +3,50 @@
 DB_FILE_PATH=./data/users.db
 
 add() {
-	read -p "Type username " username
-	read -p "Type role " role
-	mkdir -p data
-	echo "$username,$role" >> "$DB_FILE_PATH"
+	read -rep $'Type username:\n' username
+	read -rep $'Type role:\n' role
+	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
+    echo "$username,$role" >> "$DB_FILE_PATH"
 }
 
 backup() {
+	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
 	now=$(date +"%d_%m_%Y_%H_%M_%S")
 	mkdir -p backups
 	cp "$DB_FILE_PATH" "./backups/$now-users.db.backup"
 }
 
+touch2() { 
+	mkdir -p "$(dirname "$1")" && touch "$1" ; 
+}
+
+checkIfShouldCreateFileOrExit() {
+	[ -z "$1" ] && echo "You have to specify file path arg for checkIfShouldCreateFileOrExit" && exit 1
+	if [ $(checkIfFileExists "$1") == 0 ]; then
+		read -rep "File '$1' does not exists. Type 'y' to create a file and continue... " shoudCreate
+		if [ "$shoudCreate" = "y" ]; then
+			touch2 "$1"
+		else 
+			exit 1
+		fi
+	fi
+
+}
+
+checkIfFileExists() {
+	if test -f "$1"; then
+		echo 1
+	else
+		echo 0
+	fi
+}
+
 restore() {
-	if test -f "$DB_FILE_PATH"; then
-    	lastBackup=$(ls -rtc ./backups | tail -1)
-		content=$(cat "./backups/$lastBackup")
+	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
+    lastBackup=$(ls -rtc ./backups | tail -1)
+	backupFilePath="./backups/$lastBackup"
+	if [ $(checkIfFileExists "$backupFilePath") -gt 0 ]; then
+		content=$(cat $backupFilePath)
 		echo "$content" > "$DB_FILE_PATH"
 	else
 		echo "No backup file found"
@@ -26,6 +54,7 @@ restore() {
 }
 
 find() {
+	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
 	read -p "Type username " username
 	whatToFind="^$username"
 	result=$(grep $whatToFind "$DB_FILE_PATH" -w)
@@ -37,6 +66,7 @@ find() {
 }
 
 list() {
+	checkIfShouldCreateFileOrExit "$DB_FILE_PATH"
 	case $1 in
 		"--inverse") cat -b "$DB_FILE_PATH" | tail -r;;
 				  *) cat -b "$DB_FILE_PATH"
