@@ -1,0 +1,3 @@
+[submodule "shop-angular-cloudfront"]
+	path = shop-angular-cloudfront
+	url = https://github.com/EPAM-JS-Competency-center/shop-angular-cloudfront
