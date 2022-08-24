@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+if ! command -v jq &> /dev/null
+then
+    echo "'jq' could not be found. Please install it."
+    exit 1
+fi
+
 PIPLINE_FILE_PATH="./pipline.json"
 # NOW=$(date +"%d_%m_%Y_%H_%M_%S")
 NOW="2"
