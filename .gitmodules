@@ -1,3 +1,6 @@
 [submodule "nestjs-rest-api"]
 	path = nestjs-rest-api
 	url = https://github.com/EPAM-JS-Competency-center/nestjs-rest-api.git
+[submodule "fe-angular"]
+	path = fe-angular
+	url = https://github.com/EPAM-JS-Competency-center/shop-angular-cloudfront.git
