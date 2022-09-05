@@ -19,11 +19,7 @@ cd ./fe-angular/dist/app/
 zip -r ../fe.zip *
 cd ./../../../
 
-echo 'Building BE...'
-if [ $(checkIfFileExists "$BE_DIST_ZIP_PATH") -eq 1 ]; then
-	rm "$BE_DIST_ZIP_PATH"
-fi
-npm run build --prefix ./nestjs-rest-api/
+echo 'Ziping BE...'
 zip -r ./nestjs-rest-api/dist/be.zip ./nestjs-rest-api/package.json ./nestjs-rest-api/package-lock.json ./nestjs-rest-api/tsconfig.json ./nestjs-rest-api/tsconfig.build.json ./nestjs-rest-api/.env ./nestjs-rest-api/src/ ./nestjs-rest-api/nest-cli.json  
 
 echo 'Sending files to a server...'

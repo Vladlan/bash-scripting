@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 echo 'Unzipping FE...'
-cd var/www/
+cd /var/www/
 unzip -o ./fe.zip -d ./eshop.local
 
 echo 'Unzipping BE...'
-cd var/app/
+cd /var/app/
 unzip -o ./be.zip
 
 # Even in the lab2 task requirement is to send dist folder 
