@@ -25,4 +25,4 @@ else
 fi
 
 echo 'Starting new pm2 process of nestjs-api'
-npm run start:pm2 -- --watch
+npm run start:pm2
