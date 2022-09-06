@@ -20,7 +20,10 @@ zip -r ../fe.zip *
 cd ./../../../
 
 echo 'Ziping BE...'
-zip -r ./nestjs-rest-api/dist/be.zip ./nestjs-rest-api/package.json ./nestjs-rest-api/package-lock.json ./nestjs-rest-api/tsconfig.json ./nestjs-rest-api/tsconfig.build.json ./nestjs-rest-api/.env ./nestjs-rest-api/src/ ./nestjs-rest-api/nest-cli.json  
+if [ $(checkIfFileExists "$BE_DIST_ZIP_PATH") -eq 0 ]; then
+	mkdir ./nestjs-rest-api/dist
+fi
+zip -r $BE_DIST_ZIP_PATH ./nestjs-rest-api/package.json ./nestjs-rest-api/package-lock.json ./nestjs-rest-api/tsconfig.json ./nestjs-rest-api/tsconfig.build.json ./nestjs-rest-api/.env ./nestjs-rest-api/src/ ./nestjs-rest-api/nest-cli.json  
 
 echo 'Sending files to a server...'
 scp -i .vagrant/machines/default/virtualbox/private_key ./fe-angular/dist/fe.zip vagrant@192.168.0.3:/../../var/www/

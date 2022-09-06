@@ -14,6 +14,15 @@ echo 'Building BE...'
 cd ./nestjs-rest-api
 npm ci
 npm run build
-./node_modules/pm2/bin/pm2 stop nestjs-api
-./node_modules/pm2/bin/pm2 delete nestjs-api
+
+NESTJS_API_PID=$(./node_modules/pm2/bin/pm2 id nestjs-api)
+if [ ${#NESTJS_API_PID[@]} -eq 0 ]; then
+    echo "No existing pm2 PIDs"
+else
+    echo 'Deleting existing pm2 processes of nestjs-api...'
+    ./node_modules/pm2/bin/pm2 stop nestjs-api
+    ./node_modules/pm2/bin/pm2 delete nestjs-api
+fi
+
+echo 'Starting new pm2 process of nestjs-api'
 npm run start:pm2 -- --watch
