@@ -14,4 +14,6 @@ echo 'Building BE...'
 cd ./nestjs-rest-api
 npm ci
 npm run build
+./node_modules/pm2/bin/pm2 stop nestjs-api
+./node_modules/pm2/bin/pm2 delete nestjs-api
 npm run start:pm2 -- --watch
