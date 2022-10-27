@@ -12,7 +12,8 @@ unzip -o ./be.zip
 # And for nestjs default build config it will be needed to install node_modules on a server
 echo 'Building BE...'
 cd ./nestjs-rest-api
-npm ci
+cp .env.prod .env
+npm ci --force
 npm run build
 
 NESTJS_API_PID=$(./node_modules/pm2/bin/pm2 id nestjs-api)
