@@ -1,4 +1,5 @@
-Prerequisites:
+
+Prerequisites for deploy to vagrant:
 
 1. Install vagrant
 2. Ran `vagrant up` to up virtual ubuntu server on your local machine
@@ -7,3 +8,9 @@ Prerequisites:
 5. Ran `sudo ./deploy.sh` to deploy be and fe to your virtual ubuntu server
 6. If everything is fine than you will be able to access API on vagrant virtual server ip on port written in ./nestjs-rest-api/.env.prod
 7. In the end run `vagrant halt`
+
+
+Prerequisites to run build_docker_image.sh:
+
+1. docker login
+2. Than you will have to change `registry-name` in  `registry-name/nestjs-rest-api` in `build_docker_image.sh`
