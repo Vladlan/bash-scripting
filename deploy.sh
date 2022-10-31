@@ -10,6 +10,7 @@ REMOTE_SERVER_USER=vagrant
 PRIVATE_KEY_LOCATION=.vagrant/machines/default/virtualbox/private_key
 BE_ENV_FILE=./nestjs-rest-api/.env.prod
 
+cp for-be/.env.prod nestjs-rest-api/
 
 checkIfNodeJSExists() {
 	if which node > /dev/null
@@ -53,17 +54,11 @@ stopScriptIfFolderDoesNotExist() {
 
 stopScriptIfFileDoesNotExist "$BE_ENV_FILE"
 
-# # echo 'Preparing FE...'
-# npm ci --force --prefix "$FE_PATH"
-
-# # echo 'Preparing BE...'
-# npm ci --force --prefix "$BE_PATH"
-
-# echo 'Building FE...'
-# if [ $(checkIfFileExists "$FE_DIST_ZIP_PATH") -eq 1 ]; then
-# 	rm "$FE_DIST_ZIP_PATH"
-# fi
-# npm run build --prefix ./fe-angular/ -- --configuration production
+echo 'Building FE...'
+if [ $(checkIfFileExists "$FE_DIST_ZIP_PATH") -eq 1 ]; then
+	rm "$FE_DIST_ZIP_PATH"
+fi
+npm run build --prefix "$FE_PATH" -- --configuration production
 
 stopScriptIfFolderDoesNotExist "$FE_DIST_PATH"
 

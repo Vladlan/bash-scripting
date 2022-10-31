@@ -1,0 +1,6 @@
+[submodule "fe-angular"]
+	path = fe-angular
+	url = https://github.com/Vladlan/shop-angular-cloudfront
+[submodule "nestjs-rest-api"]
+	path = nestjs-rest-api
+	url = https://github.com/Vladlan/nestjs-rest-api.git

@@ -16,9 +16,12 @@ createFolderIfNotExist() {
 createFolderIfNotExist "$WWW_FOLDER_PATH"
 createFolderIfNotExist "$APP_FOLDER_PATH"
 
+echo "Installing nodejs 16"
+cd ~
+curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
+sudo bash /tmp/nodesource_setup.sh
+sudo apt install nodejs
+node -v
 
-# cd ~
-# curl -sL https://deb.nodesource.com/setup_16.x -o /tmp/nodesource_setup.sh
-# sudo bash /tmp/nodesource_setup.sh
-# sudo apt install nodejs
-# node -v
+echo "Installing NGINX"
+sudo apt install nginx
