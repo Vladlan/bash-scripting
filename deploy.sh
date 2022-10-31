@@ -10,6 +10,7 @@ REMOTE_SERVER_USER=vagrant
 PRIVATE_KEY_LOCATION=.vagrant/machines/default/virtualbox/private_key
 BE_ENV_FILE=./nestjs-rest-api/.env.prod
 
+cp for-be/.env.prod nestjs-rest-api/
 
 checkIfNodeJSExists() {
 	if which node > /dev/null
